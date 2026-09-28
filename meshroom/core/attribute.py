@@ -1257,12 +1257,9 @@ class GroupAttribute(Attribute, Expandable):
 
     def __getattr__(self, key):
         try:
-            return super().__getattr__(key)
-        except AttributeError:
-            try:
-                return self._value.get(key)
-            except KeyError:
-                raise AttributeError(key)
+            return self._value.getr(key)
+        except KeyError:
+            raise AttributeError(key)
 
     def _resetToNone(self):
         for child in self.flatStaticChildren:
